@@ -12,6 +12,7 @@ NULL
 #' @return the `tramo()` function returns a list with the results (`"JD3_REGARIMA_RSLTS"` object), the estimation specification and the result specification, while `fast.tramo()` is a faster function that only returns the results.
 #'
 #' @examples
+#' library(rjd3modelling)
 #' y = rjd3toolkit::ABS$X0.2.09.10.M
 #' sp = spec_tramo_default("trfull")
 #' sp = add_outlier(sp,
@@ -105,6 +106,7 @@ tramo_output<-function(jq){
 #'
 #'
 #' @examples
+#' library(rjd3modelling)
 #' sp = spec_tramoseats_default("rsafull")
 #' y = rjd3toolkit::ABS$X0.2.09.10.M
 #' fast.tramoseats(y, spec = sp)

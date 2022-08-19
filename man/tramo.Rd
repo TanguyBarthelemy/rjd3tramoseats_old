@@ -35,6 +35,7 @@ the \code{tramo()} function returns a list with the results (\code{"JD3_REGARIMA
 TRAMO model, pre-adjustment in TRAMO-SEATS
 }
 \examples{
+library(rjd3modelling)
 y = rjd3toolkit::ABS$X0.2.09.10.M
 sp = spec_tramo_default("trfull")
 sp = add_outlier(sp,
