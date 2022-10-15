@@ -44,7 +44,7 @@ tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), 
       jcontext<-.jnull("demetra/util/r/Dictionary")
     }else{
       # TODO
-      jcontext<-.jnull("demetra/util/r/Dictionary")
+      jcontext<-context
     }
     jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ljdplus/tramo/TramoOutput;", "fullProcess", jts, jspec, jcontext)
   }
@@ -73,7 +73,7 @@ fast.tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr
       jcontext<-.jnull("demetra/util/r/Dictionary")
     }else{
       # TODO
-      jcontext<-.jnull("demetra/util/r/Dictionary")
+      jcontext<-context
     }
     jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ljdplus/regsarima/regular/RegSarimaModel;", "process", jts, jspec, jcontext)
   }
@@ -139,7 +139,7 @@ tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4
       jcontext<-.jnull("demetra/util/r/Dictionary")
     }else{
       # TODO
-      jcontext<-.jnull("demetra/util/r/Dictionary")
+      jcontext<-context
     }
     jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ldemetra/tramoseats/io/protobuf/TramoSeatsOutput;", "fullProcess", jts, jspec, jcontext )
   }
@@ -165,6 +165,9 @@ fast.tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", 
     jspec<-r2jd_spec_tramoseats(spec)
     if (is.null(context)){
       jcontext<-.jnull("demetra/util/r/Dictionary")
+    } else {
+      #TODO
+      jcontext<-context
     }
     jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsResults;", "process", jts, jspec, jcontext)
   }
@@ -190,6 +193,9 @@ jtramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
     jspec<-r2jd_spec_tramoseats(spec)
     if (is.null(context)){
       jcontext<-.jnull("demetra/util/r/Dictionary")
+    } else {
+      #TODO
+      jcontext<-context
     }
     jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsResults;", "process", jts, jspec, jcontext)
   }
@@ -328,7 +334,7 @@ terror<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"),
       jcontext<-.jnull("demetra/util/r/Dictionary")
     }else{
       # TODO
-      jcontext<-.jnull("demetra/util/r/Dictionary")
+      jcontext<-context
     }
     jrslt<-.jcall("demetra/tramoseats/r/Terror", "Ldemetra/math/matrices/Matrix;", "process", jts, jspec, jcontext, as.integer(nback))
   }
@@ -374,7 +380,7 @@ tramo.forecast<-function(ts, spec= c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4"
       jcontext<-.jnull("demetra/util/r/Dictionary")
     }else{
       # TODO
-      jcontext<-.jnull("demetra/util/r/Dictionary")
+      jcontext<-context
     }
     jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/math/matrices/Matrix;", "forecast", jts, jspec, jcontext, as.integer(nf))
   }
