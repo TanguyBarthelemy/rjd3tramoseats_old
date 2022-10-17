@@ -116,7 +116,8 @@ p2r_spec_tramo<-function(pspec){
     td=td,
     easter=easter,
     outliers=rjd3modelling::p2r_outliers(r$outliers),
-    ramps=rjd3modelling::p2r_ramps(r$ramps)
+    ramps=rjd3modelling::p2r_ramps(r$ramps),
+    users=rjd3modelling::p2r_uservars(r$users)
   )
   e<-pspec$estimate
   estimate<-list(span=rjd3toolkit::p2r_span(e$span), ml=e$ml, tol=e$tol, ubp=e$ubp)
@@ -189,7 +190,7 @@ r2p_spec_tramo<-function(rspec){
   pspec$regression$easter$test<-rspec$regression$easter$test
   pspec$regression$easter$coefficient<-rjd3toolkit::r2p_parameter(rspec$regression$easter$coefficient)
 
-
+  pspec$regression$users <- rjd3modelling::r2p_uservars(rspec$regression$users)
   #ESTIMATE
   pspec$estimate$span<-rjd3toolkit::r2p_span(rspec$estimate$span)
   pspec$estimate$ml-rspec$estimate$ml
