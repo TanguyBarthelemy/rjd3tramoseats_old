@@ -62,6 +62,14 @@ set_estimate.JD3_TRAMOSEATS_SPEC <- function(x,
                              ...)
   x
 }
+#' @importFrom rjd3modelling set_basic
+#' @export
+set_basic.JD3_TRAMOSEATS_SPEC <- function(x,
+                                   ...){
+  x$tramo <- set_basic(x$tramo,
+                          ...)
+  x
+}
 #' @importFrom rjd3modelling set_outlier
 #' @export
 set_outlier.JD3_TRAMOSEATS_SPEC <- function(x,
@@ -90,7 +98,7 @@ set_transform.JD3_TRAMOSEATS_SPEC <- function(x,
 #' @export
 add_usrdefvar.JD3_TRAMOSEATS_SPEC <- function(x,
                                        ...){
-  x$regarima <- add_usrdefvar(x$regarima,
+  x$tramo <- add_usrdefvar(x$tramo,
                               ...)
   x
 }
