@@ -130,7 +130,7 @@ tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4
     spec = match.arg(spec[1],
                      choices = c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5")
     )
-    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ldemetra/tramoseats/io/protobuf/TramoSeatsOutput;", "fullProcess", jts, spec)
+    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsOutput;", "fullProcess", jts, spec)
   }else{
     jspec<-r2jd_spec_tramoseats(spec)
     if (is.null(context)){
@@ -138,7 +138,7 @@ tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4
     } else {
       jcontext <- rjd3modelling::.r2jd_modellingcontext(context)
     }
-    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ldemetra/tramoseats/io/protobuf/TramoSeatsOutput;", "fullProcess", jts, jspec, jcontext )
+    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsOutput;", "fullProcess", jts, jspec, jcontext )
   }
   if (is.jnull(jrslt)){
     return (NULL)
