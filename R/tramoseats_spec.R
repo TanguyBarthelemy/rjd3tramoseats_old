@@ -92,22 +92,48 @@ r2jd_spec_tramoseats<-function(spec){
 
 p2r_spec_tramo<-function(pspec){
   b<-pspec$basic
-  basic<-list(span=rjd3toolkit::p2r_span(b$span), preliminaryCheck = b$preliminary_check)
+  basic<-list(
+    span=rjd3toolkit::p2r_span(b$span),
+    preliminaryCheck = b$preliminary_check
+    )
   t<-pspec$transform
-  transform=list(fn=rjd3toolkit::enum_extract(modelling.Transformation, t$transformation), fct=t$fct)
+  transform=list(
+    fn=rjd3toolkit::enum_extract(modelling.Transformation, t$transformation),
+    fct=t$fct,
+    adjust=rjd3toolkit::enum_extract(modelling.LengthOfPeriod, t$adjust),
+    outliers=t$outliers_correction
+    )
   a<-pspec$automodel
-  automodel=list(enabled=a$enabled, acceptdef=a$accept_def, cancel=a$cancel, ub1=a$ub1, ub2=a$ub2, pcr=a$pcr, pc=a$pc, tsig=a$tsig, amicompare=a$ami_compare)
+  automodel=list(
+    enabled=a$enabled,
+    acceptdef=a$accept_def,
+    cancel=a$cancel,
+    ub1=a$ub1,
+    ub2=a$ub2,
+    pcr=a$pcr,
+    pc=a$pc,
+    tsig=a$tsig,
+    amicompare=a$ami_compare
+    )
   arima=rjd3modelling::p2r_spec_sarima(pspec$arima)
   o<-pspec$outlier
   outlier<-list(enabled=o$enabled, span=rjd3toolkit::p2r_span(o$span), ao=o$ao, ls=o$ls, tc=o$tc, so=o$so, va=o$va, tcrate=o$tcrate, ml=o$ml)
   r<-pspec$regression
   ptd<-pspec$regression$td
   pee<-pspec$regression$easter
-  td<-list(td=rjd3toolkit::enum_sextract(modelling.TradingDays, ptd$td), lp=rjd3toolkit::enum_extract(modelling.LengthOfPeriod, ptd$lp),
-           holidays=ptd$holidays, users=unlist(ptd$users), w=ptd$w,
-           test=rjd3toolkit::enum_extract(tramoseats.TradingDaysTest, ptd$test),
-           auto=rjd3toolkit::enum_extract(tramoseats.AutomaticTradingDays, ptd$auto),ptest=ptd$ptest,
-           tdcoefficients=rjd3toolkit::p2r_parameters(ptd$tdcoefficients), lpcoefficient=rjd3toolkit::p2r_parameter(ptd$lpcoefficient))
+  td<-list(
+    td=rjd3toolkit::enum_sextract(modelling.TradingDays, ptd$td),
+    lp=rjd3toolkit::enum_extract(modelling.LengthOfPeriod, ptd$lp),
+    holidays=ptd$holidays,
+    users=unlist(ptd$users),
+    w=ptd$w,
+    test=rjd3toolkit::enum_extract(tramoseats.TradingDaysTest, ptd$test),
+    auto=rjd3toolkit::enum_extract(tramoseats.AutomaticTradingDays, ptd$auto),
+    ptest=ptd$ptest,
+    autoadjust=ptd$auto_adjust,
+    tdcoefficients=rjd3toolkit::p2r_parameters(ptd$tdcoefficients),
+    lpcoefficient=rjd3toolkit::p2r_parameter(ptd$lpcoefficient)
+    )
   easter<-list(type=rjd3toolkit::enum_extract(tramoseats.EasterType, pee$type), duration=pee$duration, julian=pee$julian, test=pee$test,
                coefficient=rjd3toolkit::p2r_parameter(pee$coefficient))
   # TODO: complete regression
@@ -137,6 +163,8 @@ r2p_spec_tramo<-function(rspec){
   # TRANSFORM
   pspec$transform$transformation<-rjd3toolkit::enum_of(modelling.Transformation, rspec$transform$fn, "FN")
   pspec$transform$fct<-rspec$transform$fct
+  pspec$transform$adjust<-rspec$transform$adjust<-rjd3toolkit::enum_of(modelling.LengthOfPeriod, rspec$transform$adjust, "LP")
+  pspec$transform$outliers_correction<-rspec$transform$outliers
 
   #OUTLIER
 
@@ -179,6 +207,7 @@ r2p_spec_tramo<-function(rspec){
   pspec$regression$td$w<-rspec$regression$td$w
   pspec$regression$td$test <-rjd3toolkit::enum_of(tramoseats.TradingDaysTest, rspec$regression$td$test, "TD")
   pspec$regression$td$auto <-rjd3toolkit::enum_of(tramoseats.AutomaticTradingDays, rspec$regression$td$auto, "TD")
+  pspec$regression$td$auto_adjust <-rspec$regression$td$autoadjust
   pspec$regression$td$ptest<-rspec$regression$td$ptest
   pspec$regression$td$tdcoefficients<-rjd3toolkit::r2p_parameters(rspec$regression$td$tdcoefficients)
   pspec$regression$td$lpcoefficient<-rjd3toolkit::r2p_parameter(rspec$regression$td$lpcoefficient)

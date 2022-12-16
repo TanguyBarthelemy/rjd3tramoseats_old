@@ -6,6 +6,7 @@ import public "sa.proto";
 
 package tramoseats;
 
+option java_multiple_files = true;
 option java_package = "demetra.tramoseats.io.protobuf";
 option java_outer_classname = "TramoSeatsProtos";
 
@@ -37,7 +38,9 @@ message DecompositionSpec {
 enum AutomaticTradingDays {
 	TD_AUTO_NO = 0;
 	TD_AUTO_FTEST = 1;
-	TD_AUTO_WALDTEST = 2;
+	TD_AUTO_WALD = 2;
+	TD_AUTO_AIC = 3;
+	TD_AUTO_BIC = 4;
 }
 		
 enum TradingDaysTest {
@@ -63,7 +66,9 @@ message TramoSpec {
     message TransformSpec{
 	  modelling.Transformation transformation = 1;
 	  double fct = 2;
-    }
+ 	  modelling.LengthOfPeriod adjust = 3;
+	  bool outliers_correction = 4;
+   }
 	
 	message OutlierSpec{
 		bool enabled = 1;
@@ -108,6 +113,7 @@ message TramoSpec {
 		TradingDaysTest test = 6;
 		AutomaticTradingDays auto = 7;
 		double ptest = 8;
+		bool auto_adjust=9;
 		repeated jd3.Parameter tdcoefficients = 10;
 		jd3.Parameter lpcoefficient = 11;
 	}
@@ -176,4 +182,3 @@ message Spec{
 	DecompositionSpec seats = 2;
 	sa.BenchmarkingSpec benchmarking = 3;
 }
-
