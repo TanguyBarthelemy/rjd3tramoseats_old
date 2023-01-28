@@ -115,7 +115,7 @@ p2r_spec_tramo<-function(pspec){
     tsig=a$tsig,
     amicompare=a$ami_compare
     )
-  arima=rjd3modelling::p2r_spec_sarima(pspec$arima)
+  arima=rjd3toolkit::p2r_spec_sarima(pspec$arima)
   o<-pspec$outlier
   outlier<-list(enabled=o$enabled, span=rjd3toolkit::p2r_span(o$span), ao=o$ao, ls=o$ls, tc=o$tc, so=o$so, va=o$va, tcrate=o$tcrate, ml=o$ml)
   r<-pspec$regression
@@ -141,9 +141,9 @@ p2r_spec_tramo<-function(pspec){
     mean=rjd3toolkit::p2r_parameter(r$mean),
     td=td,
     easter=easter,
-    outliers=rjd3modelling::p2r_outliers(r$outliers),
-    ramps=rjd3modelling::p2r_ramps(r$ramps),
-    users=rjd3modelling::p2r_uservars(r$users)
+    outliers=rjd3toolkit::p2r_outliers(r$outliers),
+    ramps=rjd3toolkit::p2r_ramps(r$ramps),
+    users=rjd3toolkit::p2r_uservars(r$users)
   )
   e<-pspec$estimate
   estimate<-list(span=rjd3toolkit::p2r_span(e$span), ml=e$ml, tol=e$tol, ubp=e$ubp)
@@ -191,13 +191,13 @@ r2p_spec_tramo<-function(rspec){
   pspec$automodel$ami_compare<-rspec$automodel$amicompare
 
   #ARIMA
-  pspec$arima<-rjd3modelling::r2p_spec_sarima(rspec$arima)
+  pspec$arima<-rjd3toolkit::r2p_spec_sarima(rspec$arima)
 
   #REGRESSION
 
   pspec$regression$mean=rjd3toolkit::r2p_parameter(rspec$regression$mean)
-  pspec$regression$outliers=rjd3modelling::r2p_outliers(rspec$regression$outliers)
-  pspec$regression$ramps=rjd3modelling::r2p_ramps(rspec$regression$ramps)
+  pspec$regression$outliers=rjd3toolkit::r2p_outliers(rspec$regression$outliers)
+  pspec$regression$ramps=rjd3toolkit::r2p_ramps(rspec$regression$ramps)
 
   #TD
   pspec$regression$td$td<-rjd3toolkit::enum_sof(modelling.TradingDays, rspec$regression$td$td)
@@ -219,7 +219,7 @@ r2p_spec_tramo<-function(rspec){
   pspec$regression$easter$test<-rspec$regression$easter$test
   pspec$regression$easter$coefficient<-rjd3toolkit::r2p_parameter(rspec$regression$easter$coefficient)
 
-  pspec$regression$users <- rjd3modelling::r2p_uservars(rspec$regression$users)
+  pspec$regression$users <- rjd3toolkit::r2p_uservars(rspec$regression$users)
   #ESTIMATE
   pspec$estimate$span<-rjd3toolkit::r2p_span(rspec$estimate$span)
   pspec$estimate$ml-rspec$estimate$ml
@@ -265,7 +265,7 @@ p2r_spec_tramoseats<-function(pspec){
   return (structure(list(
     tramo=p2r_spec_tramo(pspec$tramo),
     seats=p2r_spec_seats(pspec$seats),
-    benchmarking=rjd3sa::p2r_spec_benchmarking(pspec$benchmarking)
+    benchmarking=rjd3toolkit::p2r_spec_benchmarking(pspec$benchmarking)
     ), class="JD3_TRAMOSEATS_SPEC"))
 }
 
@@ -273,6 +273,6 @@ r2p_spec_tramoseats<-function(r){
   p<-tramoseats.Spec$new()
   p$tramo<-r2p_spec_tramo(r$tramo)
   p$seats<-r2p_spec_seats(r$seats)
-  p$benchmarking<-rjd3sa::r2p_spec_benchmarking(r$benchmarking)
+  p$benchmarking<-rjd3toolkit::r2p_spec_benchmarking(r$benchmarking)
   return (p)
 }

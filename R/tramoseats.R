@@ -12,7 +12,7 @@ NULL
 #' @return the `tramo()` function returns a list with the results (`"JD3_REGARIMA_RSLTS"` object), the estimation specification and the result specification, while `fast.tramo()` is a faster function that only returns the results.
 #'
 #' @examples
-#' library(rjd3modelling)
+#' library(rjd3toolkit)
 #' y = rjd3toolkit::ABS$X0.2.09.10.M
 #' sp = spec_tramo_default("trfull")
 #' sp = add_outlier(sp,
@@ -43,7 +43,7 @@ tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), 
     if (is.null(context)){
       jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
     } else {
-      jcontext <- rjd3modelling::.r2jd_modellingcontext(context)
+      jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
     jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ljdplus/tramo/TramoOutput;", "fullProcess", jts, jspec, jcontext)
   }
@@ -71,7 +71,7 @@ fast.tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr
     if (is.null(context)){
       jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
     } else {
-      jcontext <- rjd3modelling::.r2jd_modellingcontext(context)
+      jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
     jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ljdplus/regsarima/regular/RegSarimaModel;", "process", jts, jspec, jcontext)
   }
@@ -90,7 +90,7 @@ tramo_output<-function(jq){
   q<-.jcall("demetra/tramoseats/r/Tramo", "[B", "toBuffer", jq)
   p<-RProtoBuf::read(tramoseats.TramoOutput, q)
   return (structure(list(
-    result=rjd3modelling::p2r_regarima_rslts(p$result),
+    result=rjd3toolkit::p2r_regarima_rslts(p$result),
     estimation_spec=p2r_spec_tramo(p$estimation_spec),
     result_spec=p2r_spec_tramo(p$result_spec)
   ),
@@ -104,7 +104,7 @@ tramo_output<-function(jq){
 #'
 #'
 #' @examples
-#' library(rjd3modelling)
+#' library(rjd3toolkit)
 #' sp = spec_tramoseats_default("rsafull")
 #' y = rjd3toolkit::ABS$X0.2.09.10.M
 #' fast.tramoseats(y, spec = sp)
@@ -136,7 +136,7 @@ tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4
     if (is.null(context)){
       jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
     } else {
-      jcontext <- rjd3modelling::.r2jd_modellingcontext(context)
+      jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
     jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsOutput;", "fullProcess", jts, jspec, jcontext )
   }
@@ -163,7 +163,7 @@ fast.tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", 
     if (is.null(context)){
       jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
     } else {
-      jcontext <- rjd3modelling::.r2jd_modellingcontext(context)
+      jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
     jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsResults;", "process", jts, jspec, jcontext)
   }
@@ -190,7 +190,7 @@ jtramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
     if (is.null(context)){
       jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
     } else {
-      jcontext <- rjd3modelling::.r2jd_modellingcontext(context)
+      jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
     jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsResults;", "process", jts, jspec, jcontext)
   }
@@ -328,7 +328,7 @@ terror<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"),
     if (is.null(context)){
       jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
     } else {
-      jcontext <- rjd3modelling::.r2jd_modellingcontext(context)
+      jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
     jrslt<-.jcall("demetra/tramoseats/r/Terror", "Ldemetra/math/matrices/Matrix;", "process", jts, jspec, jcontext, as.integer(nback))
   }
@@ -373,7 +373,7 @@ tramo.forecast<-function(ts, spec= c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4"
     if (is.null(context)){
       jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
     } else {
-      jcontext <- rjd3modelling::.r2jd_modellingcontext(context)
+      jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
     jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/math/matrices/Matrix;", "forecast", jts, jspec, jcontext, as.integer(nf))
   }

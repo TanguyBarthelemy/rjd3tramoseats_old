@@ -26,7 +26,7 @@ tramo.outliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=F,
     stop("y must be a time series")
   }
   if (! is.null(X.td)){
-    td<-rjd3modelling::td(s = y, groups=X.td)
+    td<-rjd3toolkit::td(s = y, groups=X.td)
     X<-cbind(X, td)
   }
 
