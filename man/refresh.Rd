@@ -2,11 +2,11 @@
 % Please edit documentation in R/tramoseats.R
 \name{refresh}
 \alias{refresh}
-\alias{tramo.refresh}
-\alias{tramoseats.refresh}
+\alias{tramo_refresh}
+\alias{tramoseats_refresh}
 \title{Refresh Policy}
 \usage{
-tramo.refresh(
+tramo_refresh(
   spec,
   refspec = NULL,
   policy = c("FreeParameters", "Complete", "Outliers_StochasticComponent", "Outliers",
@@ -16,7 +16,7 @@ tramo.refresh(
   end = NULL
 )
 
-tramoseats.refresh(
+tramoseats_refresh(
   spec,
   refspec = NULL,
   policy = c("FreeParameters", "Complete", "Outliers_StochasticComponent", "Outliers",
@@ -49,12 +49,12 @@ mod_anc = tramo(y_anc, spec_tramo_default())
 res_spec = mod_anc$result_spec
 mod_anc
 # ARIMA parameters fixed
-fast.tramo(y,
-              tramo.refresh(res_spec,
+fast_tramo(y,
+              tramo_refresh(res_spec,
                                mod_anc$estimation_spec,
                                policy = "FixedParameters"))
 # Outlier detection
-fast.tramo(y,
-              tramo.refresh(res_spec,
+fast_tramo(y,
+              tramo_refresh(res_spec,
                                policy = "Outliers"))
 }

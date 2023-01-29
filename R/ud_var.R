@@ -1,4 +1,4 @@
-add_ud_var <- function(x, jx, userdefined = NULL, out_class = NULL, result = FALSE){
+.add_ud_var <- function(x, jx, userdefined = NULL, out_class = NULL, result = FALSE){
   if (is.null(userdefined)) {
     x$user_defined = rjd3toolkit::user_defined(x, NULL)
   } else {

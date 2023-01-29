@@ -2,7 +2,7 @@
 #' @importFrom rjd3toolkit sa.decomposition
 NULL
 
-regarima_rslts <- function(jrslts){
+.regarima_rslts <- function(jrslts){
   if (is.jnull(jrslts))
     return (NULL)
   q<-.jcall("demetra/tramoseats/r/Tramo", "[B", "toBuffer", jrslts)
@@ -12,20 +12,20 @@ regarima_rslts <- function(jrslts){
 
 #' @export
 #' @rdname jd3_utilities
-tramoseats_rslts <- function(jrslts){
+.tramoseats_rslts <- function(jrslts){
   if (is.jnull(jrslts))
     return (NULL)
   q<-.jcall("demetra/tramoseats/r/TramoSeats", "[B", "toBuffer", jrslts)
   rq<-RProtoBuf::read(tramoseats.TramoSeatsResults, q)
-  return (p2r_tramoseats_rslts(rq))
+  return (.p2r_tramoseats_rslts(rq))
 }
 
-p2r_tramoseats_rslts<-function(p){
+.p2r_tramoseats_rslts<-function(p){
 
   return (structure(
     list(
       preprocessing=rjd3toolkit::.p2r_regarima_rslts(p$preprocessing),
-      decomposition=p2r_seats_rslts(p$decomposition),
+      decomposition=.p2r_seats_rslts(p$decomposition),
       final=rjd3toolkit::.p2r_sa_decomposition(p$final),
       diagnostics=rjd3toolkit::.p2r_sa_diagnostics(p$diagnostics_sa)
     ),
@@ -34,7 +34,7 @@ p2r_tramoseats_rslts<-function(p){
 
 
 
-p2r_seats_rslts<-function(p){
+.p2r_seats_rslts<-function(p){
   return (structure(
     list(
       seatsmodel=rjd3toolkit::.p2r_arima(p$seats_arima),

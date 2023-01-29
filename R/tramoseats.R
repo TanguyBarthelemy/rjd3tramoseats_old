@@ -9,7 +9,7 @@ NULL
 #' @param context the dictionnary of variables.
 #' @param userdefined a vector containing the additional output variables.
 #'
-#' @return the `tramo()` function returns a list with the results (`"JD3_REGARIMA_RSLTS"` object), the estimation specification and the result specification, while `fast.tramo()` is a faster function that only returns the results.
+#' @return the `tramo()` function returns a list with the results (`"JD3_regarima_rslts"` object), the estimation specification and the result specification, while `fast_tramo()` is a faster function that only returns the results.
 #'
 #' @examples
 #' library(rjd3toolkit)
@@ -17,7 +17,7 @@ NULL
 #' sp = spec_tramo_default("trfull")
 #' sp = add_outlier(sp,
 #'                  type = c("AO"), c("2015-01-01", "2010-01-01"))
-#' fast.tramo(y, spec = sp)
+#' fast_tramo(y, spec = sp)
 #' sp = set_transform(
 #'   set_tradingdays(
 #'     set_easter(sp, enabled = FALSE),
@@ -25,9 +25,9 @@ NULL
 #'   ),
 #'   fun = "None"
 #' )
-#' fast.tramo(y, spec = sp)
+#' fast_tramo(y, spec = sp)
 #' sp = set_outlier(sp, outliers.type = c("AO"))
-#' fast.tramo(y, spec = sp)
+#' fast_tramo(y, spec = sp)
 #' @export
 tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), context=NULL, userdefined = NULL){
   # TODO : check parameters
@@ -50,14 +50,14 @@ tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), 
   if (is.jnull(jrslt)){
     return (NULL)
   }else{
-    res = tramo_output(jrslt)
-    return (add_ud_var(res, jrslt, userdefined = userdefined))
+    res = .tramo_output(jrslt)
+    return (.add_ud_var(res, jrslt, userdefined = userdefined))
   }
 }
 
 #' @export
 #' @rdname tramo
-fast.tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), context=NULL, userdefined = NULL){
+fast_tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), context=NULL, userdefined = NULL){
   # TODO : check parameters
   jts<-rjd3toolkit::.r2jd_ts(ts)
   if (is.character(spec)){
@@ -78,13 +78,13 @@ fast.tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr
   if (is.jnull(jrslt)){
     return (NULL)
   }else{
-    res = regarima_rslts(jrslt)
-    return (add_ud_var(res, jrslt, userdefined = userdefined, result = TRUE))
+    res = .regarima_rslts(jrslt)
+    return (.add_ud_var(res, jrslt, userdefined = userdefined, result = TRUE))
   }
 }
 
 
-tramo_output<-function(jq){
+.tramo_output<-function(jq){
   if (is.jnull(jq))
     return (NULL)
   q<-.jcall("demetra/tramoseats/r/Tramo", "[B", "toBuffer", jq)
@@ -107,7 +107,7 @@ tramo_output<-function(jq){
 #' library(rjd3toolkit)
 #' sp = spec_tramoseats_default("rsafull")
 #' y = rjd3toolkit::ABS$X0.2.09.10.M
-#' fast.tramoseats(y, spec = sp)
+#' fast_tramoseats(y, spec = sp)
 #' sp = add_outlier(sp,
 #'                  type = c("AO"), c("2015-01-01", "2010-01-01"))
 #' sp = set_transform(
@@ -117,8 +117,8 @@ tramo_output<-function(jq){
 #'   ),
 #'   fun = "None"
 #' )
-#' fast.tramoseats(y, spec = sp)
-#' @return the `tramoseats()` function returns a list with the results, the estimation specification and the result specification, while `fast.tramoseats()` is a faster function that only returns the results.
+#' fast_tramoseats(y, spec = sp)
+#' @return the `tramoseats()` function returns a list with the results, the estimation specification and the result specification, while `fast_tramoseats()` is a faster function that only returns the results.
 #' The `jtramoseats()` functions only results the java object to custom outputs in other packages (use [rjd3toolkit::dictionary()] to
 #' get the list of variables and [rjd3toolkit::result()] to get a specific variable).
 #' @export
@@ -143,14 +143,14 @@ tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4
   if (is.jnull(jrslt)){
     return (NULL)
   }else{
-    res = tramoseats_output(jrslt)
-    return (add_ud_var(res, jrslt, userdefined = userdefined))
+    res = .tramoseats_output(jrslt)
+    return (.add_ud_var(res, jrslt, userdefined = userdefined))
   }
 }
 
 #' @export
 #' @rdname tramoseats
-fast.tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5"), context=NULL, userdefined = NULL){
+fast_tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5"), context=NULL, userdefined = NULL){
   jts<-rjd3toolkit::.r2jd_ts(ts)
   if (is.character(spec)){
     spec = gsub("tr", "rsa", tolower(spec), fixed = TRUE)
@@ -170,8 +170,8 @@ fast.tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", 
   if (is.jnull(jrslt)){
     return (NULL)
   }else{
-    res = tramoseats_rslts(jrslt)
-    return (add_ud_var(res, jrslt, userdefined = userdefined, result = TRUE))
+    res = .tramoseats_rslts(jrslt)
+    return (.add_ud_var(res, jrslt, userdefined = userdefined, result = TRUE))
   }
 }
 
@@ -202,15 +202,15 @@ jtramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
   }
 }
 
-tramoseats_output<-function(jq){
+.tramoseats_output<-function(jq){
   if (is.jnull(jq))
     return (NULL)
   q<-.jcall("demetra/tramoseats/r/TramoSeats", "[B", "toBuffer", jq)
   p<-RProtoBuf::read(tramoseats.TramoSeatsOutput, q)
   return (structure(list(
-    result=p2r_tramoseats_rslts(p$result),
-    estimation_spec=p2r_spec_tramoseats(p$estimation_spec),
-    result_spec=p2r_spec_tramoseats(p$result_spec)
+    result=.p2r_tramoseats_rslts(p$result),
+    estimation_spec=.p2r_spec_tramoseats(p$estimation_spec),
+    result_spec=.p2r_spec_tramoseats(p$result_spec)
   ),
   class="JD3_TRAMOSEATS_OUTPUT")
   )
@@ -233,18 +233,18 @@ tramoseats_output<-function(jq){
 #' res_spec = mod_anc$result_spec
 #' mod_anc
 #' # ARIMA parameters fixed
-#' fast.tramo(y,
-#'               tramo.refresh(res_spec,
+#' fast_tramo(y,
+#'               tramo_refresh(res_spec,
 #'                                mod_anc$estimation_spec,
 #'                                policy = "FixedParameters"))
 #' # Outlier detection
-#' fast.tramo(y,
-#'               tramo.refresh(res_spec,
+#' fast_tramo(y,
+#'               tramo_refresh(res_spec,
 #'                                policy = "Outliers"))
 #' @name refresh
 #' @rdname refresh
 #' @export
-tramo.refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Complete", "Outliers_StochasticComponent", "Outliers", "FixedParameters", "FixedAutoRegressiveParameters", "Fixed"), period=0, start=NULL, end=NULL){
+tramo_refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Complete", "Outliers_StochasticComponent", "Outliers", "FixedParameters", "FixedAutoRegressiveParameters", "Fixed"), period=0, start=NULL, end=NULL){
   policy=match.arg(policy)
   if (!inherits(spec, "JD3_TRAMO_SPEC"))
     stop("Invalid specification type")
@@ -264,7 +264,7 @@ tramo.refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Complete
 
 #' @rdname refresh
 #' @export
-tramoseats.refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Complete", "Outliers_StochasticComponent", "Outliers", "FixedParameters", "FixedAutoRegressiveParameters", "Fixed", "Current"), period=0, start=NULL, end=NULL){
+tramoseats_refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Complete", "Outliers_StochasticComponent", "Outliers", "FixedParameters", "FixedAutoRegressiveParameters", "Fixed", "Current"), period=0, start=NULL, end=NULL){
   policy=match.arg(policy)
   if (!inherits(spec, "JD3_TRAMOSEATS_SPEC"))
     stop("Invalid specification type")

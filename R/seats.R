@@ -9,9 +9,9 @@ NULL
 #'
 #'
 #' @examples
-#' seats.decompose(rjd3toolkit::sarima_model(period = 12,phi = c(0,1),bd = 1))
+#' seats_decompose(rjd3toolkit::sarima_model(period = 12,phi = c(0,1),bd = 1))
 #' @export
-seats.decompose<-function(sarima, seas.tolerance=2, trend.boundary=.5, seas.boundary=.8,
+seats_decompose<-function(sarima, seas.tolerance=2, trend.boundary=.5, seas.boundary=.8,
                           seas.boundary.unique=.8, approximation=c("None", "Legacy", "Noisy")){
   if (!inherits(sarima, "JD3_SARIMA"))
     stop("Invalid model")

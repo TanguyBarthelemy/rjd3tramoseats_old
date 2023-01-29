@@ -3,14 +3,14 @@
 %   R/tramoseats_spec.R
 \name{jd3_utilities}
 \alias{jd3_utilities}
-\alias{tramoseats_rslts}
+\alias{.tramoseats_rslts}
 \alias{jd2r_spec_tramo}
 \alias{r2jd_spec_tramo}
 \alias{jd2r_spec_tramoseats}
 \alias{r2jd_spec_tramoseats}
 \title{Java Utility Functions}
 \usage{
-tramoseats_rslts(jrslts)
+.tramoseats_rslts(jrslts)
 
 jd2r_spec_tramo(spec)
 

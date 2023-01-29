@@ -63,7 +63,7 @@ jd2r_spec_tramo<-function(spec){
 #' @export
 #' @rdname jd3_utilities
 r2jd_spec_tramo<-function(spec){
-  pspec<-r2p_spec_tramo(spec)
+  pspec<-.r2p_spec_tramo(spec)
   nq<-RProtoBuf::serialize(pspec, NULL)
   nspec<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/tramo/TramoSpec;", "specOf", nq)
   return (nspec)
@@ -74,13 +74,13 @@ r2jd_spec_tramo<-function(spec){
 jd2r_spec_tramoseats<-function(spec){
   q<-.jcall("demetra/tramoseats/r/TramoSeats", "[B", "toBuffer", spec)
   rq<-RProtoBuf::read(tramoseats.Spec, q)
-  return (p2r_spec_tramoseats(rq))
+  return (.p2r_spec_tramoseats(rq))
 }
 
 #' @export
 #' @rdname jd3_utilities
 r2jd_spec_tramoseats<-function(spec){
-  pspec<-r2p_spec_tramoseats(spec)
+  pspec<-.r2p_spec_tramoseats(spec)
   nq<-RProtoBuf::serialize(pspec, NULL)
   nspec<-.jcall("demetra/tramoseats/r/TramoSeats", "Ldemetra/tramoseats/TramoSeatsSpec;", "specOf", nq)
   return (nspec)
@@ -154,7 +154,7 @@ p2r_spec_tramo<-function(pspec){
 }
 
 
-r2p_spec_tramo<-function(rspec){
+.r2p_spec_tramo<-function(rspec){
   pspec<-tramoseats.TramoSpec$new()
   # BIAS
   pspec$basic$span<-rjd3toolkit::.r2p_span(rspec$basic$span)
@@ -231,7 +231,7 @@ r2p_spec_tramo<-function(rspec){
 
 # SEATS
 
-p2r_spec_seats<-function(spec){
+.p2r_spec_seats<-function(spec){
   return (structure(list(
     xl=spec$xl_boundary,
     approximation=rjd3toolkit::.enum_extract(tramoseats.SeatsApproximation, spec$approximation),
@@ -246,7 +246,7 @@ p2r_spec_seats<-function(spec){
   ), class = "JD3_SEATS_SPEC"))
 }
 
-r2p_spec_seats<-function(spec){
+.r2p_spec_seats<-function(spec){
   pspec<-tramoseats.DecompositionSpec$new()
   pspec$xl_boundary<-spec$xl
   pspec$approximation<-rjd3toolkit::.enum_of(tramoseats.SeatsApproximation, spec$approximation, "SEATS")
@@ -261,18 +261,18 @@ r2p_spec_seats<-function(spec){
   return (pspec)
 }
 
-p2r_spec_tramoseats<-function(pspec){
+.p2r_spec_tramoseats<-function(pspec){
   return (structure(list(
     tramo=p2r_spec_tramo(pspec$tramo),
-    seats=p2r_spec_seats(pspec$seats),
+    seats=.p2r_spec_seats(pspec$seats),
     benchmarking=rjd3toolkit::.p2r_spec_benchmarking(pspec$benchmarking)
     ), class="JD3_TRAMOSEATS_SPEC"))
 }
 
-r2p_spec_tramoseats<-function(r){
+.r2p_spec_tramoseats<-function(r){
   p<-tramoseats.Spec$new()
-  p$tramo<-r2p_spec_tramo(r$tramo)
-  p$seats<-r2p_spec_seats(r$seats)
+  p$tramo<-.r2p_spec_tramo(r$tramo)
+  p$seats<-.r2p_spec_seats(r$seats)
   p$benchmarking<-rjd3toolkit::.r2p_spec_benchmarking(r$benchmarking)
   return (p)
 }
