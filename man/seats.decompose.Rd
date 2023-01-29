@@ -14,7 +14,7 @@ seats.decompose(
 )
 }
 \arguments{
-\item{sarima}{SARIMA model (see \code{\link[rjd3toolkit:sarima.model]{rjd3toolkit::sarima.model()}}).}
+\item{sarima}{SARIMA model (see \code{\link[rjd3toolkit:sarima_model]{rjd3toolkit::sarima_model()}}).}
 
 \item{seas.tolerance}{numeric: the seasonal tolerance. The tolerance (measured in degrees) to allocate the AR non-real roots
 to the seasonal component (if the modulus of the inverse complex AR root is greater than the trend boundary
@@ -36,5 +36,5 @@ in the seasonal component, when the root is the unique seasonal root.}
 SEATS Decomposition
 }
 \examples{
-seats.decompose(rjd3toolkit::sarima.model(period = 12,phi = c(0,1),bd = 1))
+seats.decompose(rjd3toolkit::sarima_model(period = 12,phi = c(0,1),bd = 1))
 }

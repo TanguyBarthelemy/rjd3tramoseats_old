@@ -31,7 +31,7 @@ NULL
 #' @export
 tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), context=NULL, userdefined = NULL){
   # TODO : check parameters
-  jts<-rjd3toolkit::ts_r2jd(ts)
+  jts<-rjd3toolkit::.r2jd_ts(ts)
   if (is.character(spec)){
     spec = gsub("rsa", "tr", tolower(spec), fixed = TRUE)
     spec = match.arg(spec[1],
@@ -59,7 +59,7 @@ tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), 
 #' @rdname tramo
 fast.tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), context=NULL, userdefined = NULL){
   # TODO : check parameters
-  jts<-rjd3toolkit::ts_r2jd(ts)
+  jts<-rjd3toolkit::.r2jd_ts(ts)
   if (is.character(spec)){
     spec = gsub("rsa", "tr", tolower(spec), fixed = TRUE)
     spec = match.arg(spec[1],
@@ -90,7 +90,7 @@ tramo_output<-function(jq){
   q<-.jcall("demetra/tramoseats/r/Tramo", "[B", "toBuffer", jq)
   p<-RProtoBuf::read(tramoseats.TramoOutput, q)
   return (structure(list(
-    result=rjd3toolkit::p2r_regarima_rslts(p$result),
+    result=rjd3toolkit::.p2r_regarima_rslts(p$result),
     estimation_spec=p2r_spec_tramo(p$estimation_spec),
     result_spec=p2r_spec_tramo(p$result_spec)
   ),
@@ -124,7 +124,7 @@ tramo_output<-function(jq){
 #' @export
 tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5"), context=NULL, userdefined = NULL){
   # TODO : check parameters
-  jts<-rjd3toolkit::ts_r2jd(ts)
+  jts<-rjd3toolkit::.r2jd_ts(ts)
   if (is.character(spec)){
     spec = gsub("tr", "rsa", tolower(spec), fixed = TRUE)
     spec = match.arg(spec[1],
@@ -151,7 +151,7 @@ tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4
 #' @export
 #' @rdname tramoseats
 fast.tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5"), context=NULL, userdefined = NULL){
-  jts<-rjd3toolkit::ts_r2jd(ts)
+  jts<-rjd3toolkit::.r2jd_ts(ts)
   if (is.character(spec)){
     spec = gsub("tr", "rsa", tolower(spec), fixed = TRUE)
     spec = match.arg(spec[1],
@@ -178,7 +178,7 @@ fast.tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", 
 #' @export
 #' @rdname tramoseats
 jtramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5"), context=NULL, userdefined = NULL){
-  jts<-rjd3toolkit::ts_r2jd(ts)
+  jts<-rjd3toolkit::.r2jd_ts(ts)
   if (is.character(spec)){
     spec = gsub("tr", "rsa", tolower(spec), fixed = TRUE)
     spec = match.arg(spec[1],
@@ -197,7 +197,7 @@ jtramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
   if (is.jnull(jrslt)){
     return (NULL)
   }else{
-    res = rjd3toolkit::jd3Object(jrslt, result = TRUE)
+    res = rjd3toolkit::.jd3_object(jrslt, result = TRUE)
     return (res)
   }
 }
@@ -257,7 +257,7 @@ tramo.refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Complete
       stop("Invalid specification type")
     jrefspec<-r2jd_spec_tramo(refspec)
   }
-  jdom<-rjd3toolkit::jdomain(period, start, end)
+  jdom<-rjd3toolkit::.jdomain(period, start, end)
   jnspec<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/tramo/TramoSpec;", "refreshSpec", jspec, jrefspec, jdom, policy)
   return (jd2r_spec_tramo(jnspec))
 }
@@ -277,7 +277,7 @@ tramoseats.refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Com
       stop("Invalid specification type")
     jrefspec<-r2jd_spec_tramoseats(refspec)
   }
-  jdom<-rjd3toolkit::jdomain(period, start, end)
+  jdom<-rjd3toolkit::.jdomain(period, start, end)
   jnspec<-.jcall("demetra/tramoseats/r/TramoSeats", "Ldemetra/tramoseats/TramoSeatsSpec;", "refreshSpec", jspec, jrefspec, jdom, policy)
   return (jd2r_spec_tramoseats(jnspec))
 
@@ -316,7 +316,7 @@ forecast_names<-c("forecast", "error", "fraw", "efraw")
 #' terror(rjd3toolkit::ABS$X0.2.09.10.M, nback = 2)
 #' @export
 terror<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), nback=1, context=NULL){
-  jts<-rjd3toolkit::ts_r2jd(ts)
+  jts<-rjd3toolkit::.r2jd_ts(ts)
   if (is.character(spec)){
     spec = gsub("rsa", "tr", tolower(spec), fixed = TRUE)
     spec = match.arg(spec[1],
@@ -335,7 +335,7 @@ terror<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"),
   if (is.jnull(jrslt)){
     return (NULL)
   }else{
-    rslt <- rjd3toolkit::matrix_jd2r(jrslt)
+    rslt <- rjd3toolkit::.jd2r_matrix(jrslt)
     rslt <- ts(rslt, end = end(ts), frequency = frequency(ts))
     colnames(rslt)<-terror_names
     return (rslt)
@@ -359,7 +359,7 @@ terror<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"),
 #' @export
 tramo.forecast<-function(ts, spec= c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), nf=-1, context=NULL){
   # TODO : check parameters
-  jts<-rjd3toolkit::ts_r2jd(ts)
+  jts<-rjd3toolkit::.r2jd_ts(ts)
   if (nf<0) nf<-frequency(ts)*(-nf)
 
   if (is.character(spec)){
@@ -380,7 +380,7 @@ tramo.forecast<-function(ts, spec= c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4"
   if (is.jnull(jrslt)){
     return (NULL)
   }else{
-    rslt<-rjd3toolkit::matrix_jd2r(jrslt)
+    rslt<-rjd3toolkit::.jd2r_matrix(jrslt)
     rslt <- ts(rslt, frequency = frequency(ts),
                start = time(ts)[length(ts)] + 1/frequency(ts))
     colnames(rslt)<-forecast_names

@@ -11,7 +11,7 @@ add_ud_var <- function(x, jx, userdefined = NULL, out_class = NULL, result = FAL
         res = .jcall(jx, out_class, "getResult")
       }
     }
-    res = rjd3toolkit::jd3Object(res, result = TRUE)
+    res = rjd3toolkit::.jd3_object(res, result = TRUE)
     x$user_defined = rjd3toolkit::user_defined(res, userdefined = userdefined)
   }
   x
@@ -33,10 +33,10 @@ userdefined_variables_tramoseats <- function(x = c("TRAMO-SEATS","TRAMO")){
                  choices = c("tramoseats", "tramo"))
 
   # library(rjd3tramoseats)
-  # jts<-rjd3toolkit::ts_r2jd(rjd3toolkit::ABS$X0.2.09.10.M)
+  # jts<-rjd3toolkit::.r2jd_ts(rjd3toolkit::ABS$X0.2.09.10.M)
   # jrslt<- rJava::.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsResults;",
   #                       "process", jts, "rsafull")
-  # rjd3toolkit::dictionary(rjd3toolkit::jd3Object(jrslt, result = TRUE)) |>
+  # rjd3toolkit::dictionary(rjd3toolkit::.jd3_object(jrslt, result = TRUE)) |>
   #   sort() |>
   #   dput()
 
@@ -138,9 +138,9 @@ userdefined_variables_tramoseats <- function(x = c("TRAMO-SEATS","TRAMO")){
                     "variancedecomposition.total", "y", "y_b(?)", "y_eb(?)", "y_ef(?)",
                     "y_f(?)", "yc", "ycal")
 
-  # jts<-rjd3toolkit::ts_r2jd(rjd3toolkit::ABS$X0.2.09.10.M)
+  # jts<-rjd3toolkit::.r2jd_ts(rjd3toolkit::ABS$X0.2.09.10.M)
   # jrslt<- rJava::.jcall("demetra/tramoseats/r/Tramo", "Ljdplus/regsarima/regular/RegSarimaModel;", "process", jts, "trfull")
-  # rjd3toolkit::dictionary(rjd3toolkit::jd3Object(jrslt, result = TRUE)) |>
+  # rjd3toolkit::dictionary(rjd3toolkit::.jd3_object(jrslt, result = TRUE)) |>
   #   sort() |>
   #   dput()
 
