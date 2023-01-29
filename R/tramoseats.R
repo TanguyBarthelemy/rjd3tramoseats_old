@@ -14,7 +14,7 @@ NULL
 #' @examples
 #' library(rjd3toolkit)
 #' y = rjd3toolkit::ABS$X0.2.09.10.M
-#' sp = spec_tramo_default("trfull")
+#' sp = spec_tramo("trfull")
 #' sp = add_outlier(sp,
 #'                  type = c("AO"), c("2015-01-01", "2010-01-01"))
 #' fast_tramo(y, spec = sp)
@@ -105,7 +105,7 @@ fast_tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr
 #'
 #' @examples
 #' library(rjd3toolkit)
-#' sp = spec_tramoseats_default("rsafull")
+#' sp = spec_tramoseats("rsafull")
 #' y = rjd3toolkit::ABS$X0.2.09.10.M
 #' fast_tramoseats(y, spec = sp)
 #' sp = add_outlier(sp,
@@ -229,7 +229,7 @@ jtramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
 #' @examples
 #' y = rjd3toolkit::ABS$X0.2.08.10.M
 #' y_anc = window(y,end = 2009)
-#' mod_anc = tramo(y_anc, spec_tramo_default())
+#' mod_anc = tramo(y_anc, spec_tramo())
 #' res_spec = mod_anc$result_spec
 #' mod_anc
 #' # ARIMA parameters fixed

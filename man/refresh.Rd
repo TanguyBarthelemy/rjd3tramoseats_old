@@ -45,7 +45,7 @@ Refresh Policy
 \examples{
 y = rjd3toolkit::ABS$X0.2.08.10.M
 y_anc = window(y,end = 2009)
-mod_anc = tramo(y_anc, spec_tramo_default())
+mod_anc = tramo(y_anc, spec_tramo())
 res_spec = mod_anc$result_spec
 mod_anc
 # ARIMA parameters fixed

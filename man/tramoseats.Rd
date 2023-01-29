@@ -46,7 +46,7 @@ Seasonal Adjustment with  TRAMO-SEATS
 }
 \examples{
 library(rjd3toolkit)
-sp = spec_tramoseats_default("rsafull")
+sp = spec_tramoseats("rsafull")
 y = rjd3toolkit::ABS$X0.2.09.10.M
 fast_tramoseats(y, spec = sp)
 sp = add_outlier(sp,

@@ -10,8 +10,8 @@ NULL
 #'
 #' @param name the name of a predefined specification.
 #'
-#' @return an object of class `"JD3_TRAMOSEATS_SPEC"` (`spec_tramoseats_default()`) or
-#' `"JD3_TRAMO_SPEC"` (`spec_tramo_default()`).
+#' @return an object of class `"JD3_TRAMOSEATS_SPEC"` (`spec_tramoseats()`) or
+#' `"JD3_TRAMO_SPEC"` (`spec_tramo()`).
 #'
 #' @details
 #' The available predefined 'JDemetra+' model specifications are described in the table below:
@@ -29,7 +29,7 @@ NULL
 #' @name tramoseats_spec
 #' @rdname tramoseats_spec
 #' @export
-spec_tramo_default<-function(name=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5")){
+spec_tramo<-function(name=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5")){
   name = gsub("rsa", "tr", tolower(name), fixed = TRUE)
   name = match.arg(name[1],
                    choices = c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5")
@@ -41,7 +41,7 @@ spec_tramo_default<-function(name=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4",
 
 #' @rdname tramoseats_spec
 #' @export
-spec_tramoseats_default<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5")){
+spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5")){
   name = gsub("tr", "rsa", tolower(name), fixed = TRUE)
   name = match.arg(name[1],
                    choices = c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5")

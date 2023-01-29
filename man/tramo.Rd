@@ -37,7 +37,7 @@ TRAMO model, pre-adjustment in TRAMO-SEATS
 \examples{
 library(rjd3toolkit)
 y = rjd3toolkit::ABS$X0.2.09.10.M
-sp = spec_tramo_default("trfull")
+sp = spec_tramo("trfull")
 sp = add_outlier(sp,
                  type = c("AO"), c("2015-01-01", "2010-01-01"))
 fast_tramo(y, spec = sp)
