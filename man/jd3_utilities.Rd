@@ -4,21 +4,21 @@
 \name{jd3_utilities}
 \alias{jd3_utilities}
 \alias{.tramoseats_rslts}
-\alias{jd2r_spec_tramo}
-\alias{r2jd_spec_tramo}
-\alias{jd2r_spec_tramoseats}
-\alias{r2jd_spec_tramoseats}
+\alias{.jd2r_spec_tramo}
+\alias{.r2jd_spec_tramo}
+\alias{.jd2r_spec_tramoseats}
+\alias{.r2jd_spec_tramoseats}
 \title{Java Utility Functions}
 \usage{
 .tramoseats_rslts(jrslts)
 
-jd2r_spec_tramo(spec)
+.jd2r_spec_tramo(spec)
 
-r2jd_spec_tramo(spec)
+.r2jd_spec_tramo(spec)
 
-jd2r_spec_tramoseats(spec)
+.jd2r_spec_tramoseats(spec)
 
-r2jd_spec_tramoseats(spec)
+.r2jd_spec_tramoseats(spec)
 }
 \arguments{
 \item{spec, jrslts}{parameters.}
