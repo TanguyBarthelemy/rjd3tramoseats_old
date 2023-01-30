@@ -12,16 +12,16 @@
 \usage{
 .tramoseats_rslts(jrslts)
 
-.jd2r_spec_tramo(spec)
+.jd2r_spec_tramo(jspec)
 
 .r2jd_spec_tramo(spec)
 
-.jd2r_spec_tramoseats(spec)
+.jd2r_spec_tramoseats(jspec)
 
 .r2jd_spec_tramoseats(spec)
 }
 \arguments{
-\item{spec, jrslts}{parameters.}
+\item{spec, jspec, jrslts}{parameters.}
 }
 \description{
 These functions are used in all JDemetra+ 3.0 packages to easily interact between R and Java objects.

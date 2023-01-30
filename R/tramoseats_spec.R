@@ -54,8 +54,8 @@ spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
 
 #' @export
 #' @rdname jd3_utilities
-.jd2r_spec_tramo<-function(spec){
-  q<-.jcall("demetra/tramoseats/r/Tramo", "[B", "toBuffer", spec)
+.jd2r_spec_tramo<-function(jspec){
+  q<-.jcall("demetra/tramoseats/r/Tramo", "[B", "toBuffer", jspec)
   rq<-RProtoBuf::read(tramoseats.TramoSpec, q)
   return (.p2r_spec_tramo(rq))
 }
@@ -71,8 +71,8 @@ spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
 
 #' @export
 #' @rdname jd3_utilities
-.jd2r_spec_tramoseats<-function(spec){
-  q<-.jcall("demetra/tramoseats/r/TramoSeats", "[B", "toBuffer", spec)
+.jd2r_spec_tramoseats<-function(jspec){
+  q<-.jcall("demetra/tramoseats/r/TramoSeats", "[B", "toBuffer", jspec)
   rq<-RProtoBuf::read(tramoseats.Spec, q)
   return (.p2r_spec_tramoseats(rq))
 }
