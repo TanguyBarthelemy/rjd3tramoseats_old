@@ -2,15 +2,13 @@
 % Please edit documentation in R/tramoseats_spec.R
 \name{tramoseats_spec}
 \alias{tramoseats_spec}
-\alias{spec_tramo_default}
-\alias{spec_tramoseats_default}
+\alias{spec_tramo}
+\alias{spec_tramoseats}
 \title{TRAMO/TRAMO-SEATS Default Specification}
 \usage{
-spec_tramo_default(
-  name = c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5")
-)
+spec_tramo(name = c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"))
 
-spec_tramoseats_default(
+spec_tramoseats(
   name = c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5")
 )
 }
@@ -18,8 +16,8 @@ spec_tramoseats_default(
 \item{name}{the name of a predefined specification.}
 }
 \value{
-an object of class \code{"JD3_TRAMOSEATS_SPEC"} (\code{spec_tramoseats_default()}) or
-\code{"JD3_TRAMO_SPEC"} (\code{spec_tramo_default()}).
+an object of class \code{"JD3_TRAMOSEATS_SPEC"} (\code{spec_tramoseats()}) or
+\code{"JD3_TRAMO_SPEC"} (\code{spec_tramo()}).
 }
 \description{
 Set of functions to create default specification associated to the TRAMO-SEATS seasonal adjustment method.
