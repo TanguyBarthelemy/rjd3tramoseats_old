@@ -34,7 +34,7 @@ spec_tramo<-function(name=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"))
   name = match.arg(name[1],
                    choices = c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5")
   )
-  jspec<-.jcall("demetra/tramo/TramoSpec", "Ldemetra/tramo/TramoSpec;", "fromString", name)
+  jspec<-.jcall("jdplus/tramoseats/base/api/tramo/TramoSpec", "Ljdplus/tramoseats/base/api/tramo/TramoSpec;", "fromString", name)
   return (.jd2r_spec_tramo(jspec))
 }
 
@@ -46,7 +46,7 @@ spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
   name = match.arg(name[1],
                    choices = c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5")
   )
-  jspec<-.jcall("demetra/tramoseats/TramoSeatsSpec", "Ldemetra/tramoseats/TramoSeatsSpec;", "fromString", name)
+  jspec<-.jcall("jdplus/tramoseats/base/api/tramoseats/TramoSeatsSpec", "Ljdplus/tramoseats/base/api/tramoseats/TramoSeatsSpec;", "fromString", name)
   return (.jd2r_spec_tramoseats(jspec))
 }
 
@@ -55,7 +55,7 @@ spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
 #' @export
 #' @rdname jd3_utilities
 .jd2r_spec_tramo<-function(jspec){
-  q<-.jcall("demetra/tramoseats/r/Tramo", "[B", "toBuffer", jspec)
+  q<-.jcall("jdplus/tramoseats/base/r/Tramo", "[B", "toBuffer", jspec)
   rq<-RProtoBuf::read(tramoseats.TramoSpec, q)
   return (.p2r_spec_tramo(rq))
 }
@@ -65,14 +65,14 @@ spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
 .r2jd_spec_tramo<-function(spec){
   pspec<-.r2p_spec_tramo(spec)
   nq<-RProtoBuf::serialize(pspec, NULL)
-  nspec<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/tramo/TramoSpec;", "specOf", nq)
+  nspec<-.jcall("jdplus/tramoseats/base/r/Tramo", "Ljdplus/tramoseats/base/api/tramo/TramoSpec;", "specOf", nq)
   return (nspec)
 }
 
 #' @export
 #' @rdname jd3_utilities
 .jd2r_spec_tramoseats<-function(jspec){
-  q<-.jcall("demetra/tramoseats/r/TramoSeats", "[B", "toBuffer", jspec)
+  q<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "[B", "toBuffer", jspec)
   rq<-RProtoBuf::read(tramoseats.Spec, q)
   return (.p2r_spec_tramoseats(rq))
 }
@@ -82,7 +82,7 @@ spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
 .r2jd_spec_tramoseats<-function(spec){
   pspec<-.r2p_spec_tramoseats(spec)
   nq<-RProtoBuf::serialize(pspec, NULL)
-  nspec<-.jcall("demetra/tramoseats/r/TramoSeats", "Ldemetra/tramoseats/TramoSeatsSpec;", "specOf", nq)
+  nspec<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "Ljdplus/tramoseats/base/api/tramoseats/TramoSeatsSpec;", "specOf", nq)
   return (nspec)
 }
 
@@ -139,6 +139,7 @@ spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
   # TODO: complete regression
   regression<-list(
     mean=rjd3toolkit::.p2r_parameter(r$mean),
+    check_mean=r$check_mean,
     td=td,
     easter=easter,
     outliers=rjd3toolkit::.p2r_outliers(r$outliers),
@@ -195,9 +196,10 @@ spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
 
   #REGRESSION
 
-  pspec$regression$mean=rjd3toolkit::.r2p_parameter(rspec$regression$mean)
-  pspec$regression$outliers=rjd3toolkit::.r2p_outliers(rspec$regression$outliers)
-  pspec$regression$ramps=rjd3toolkit::.r2p_ramps(rspec$regression$ramps)
+  pspec$regression$mean<-rjd3toolkit::.r2p_parameter(rspec$regression$mean)
+  pspec$regression$check_mean<-rspec$check_mean
+  pspec$regression$outliers<-rjd3toolkit::.r2p_outliers(rspec$regression$outliers)
+  pspec$regression$ramps<-rjd3toolkit::.r2p_ramps(rspec$regression$ramps)
 
   #TD
   pspec$regression$td$td<-rjd3toolkit::.enum_sof(modelling.TradingDays, rspec$regression$td$td)
