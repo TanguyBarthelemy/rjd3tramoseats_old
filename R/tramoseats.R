@@ -355,9 +355,9 @@ terror<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"),
 #' - `fraw` the forecast of the transformed series.
 #' - `efraw` the standard deviation of the forecast of the transformed series.
 #' @examples
-#' tramo.forecast(rjd3toolkit::ABS$X0.2.09.10.M)
+#' tramo_forecast(rjd3toolkit::ABS$X0.2.09.10.M)
 #' @export
-tramo.forecast<-function(ts, spec= c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), nf=-1, context=NULL){
+tramo_forecast<-function(ts, spec= c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), nf=-1, context=NULL){
   # TODO : check parameters
   jts<-rjd3toolkit::.r2jd_ts(ts)
   if (nf<0) nf<-frequency(ts)*(-nf)
