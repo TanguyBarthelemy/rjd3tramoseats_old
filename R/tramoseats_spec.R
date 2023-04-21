@@ -197,7 +197,7 @@ spec_tramoseats<-function(name=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
   #REGRESSION
 
   pspec$regression$mean<-rjd3toolkit::.r2p_parameter(rspec$regression$mean)
-  pspec$regression$check_mean<-rspec$check_mean
+  pspec$regression$check_mean<-rspec$regression$check_mean
   pspec$regression$outliers<-rjd3toolkit::.r2p_outliers(rspec$regression$outliers)
   pspec$regression$ramps<-rjd3toolkit::.r2p_ramps(rspec$regression$ramps)
 
