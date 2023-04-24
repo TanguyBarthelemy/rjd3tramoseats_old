@@ -19,7 +19,7 @@ set_seats(
 )
 }
 \arguments{
-\item{x}{the specification.}
+\item{x}{the specification to be modified, object of class \code{"JD3_TRAMOSEATS_SPEC"}, has to be generated with \code{spec_tramoseats()} function}
 
 \item{approximation}{character: the approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: \code{"None"} - performs an approximation; \code{"Legacy"} - replaces the model with a decomposable one; \code{"Noisy"} - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO.}
 
@@ -52,6 +52,10 @@ as it may become numerically unstable when some roots of the MA polynomial are n
 
 \item{bias}{TODO.}
 }
+\value{
+an object of class  \code{"JD3_TRAMOSEATS_SPEC"}.
+}
 \description{
-Set Seats Specification
+Seats is an Arima Model Based decomposition algorithm working in conjunction with Tramo.
+Function allowing to customize parameters in the Seats (decomposition) part of a Tramo-Seats.
 }
