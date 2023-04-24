@@ -2,9 +2,8 @@
 #' Set Seats Specification
 #'
 #' @description
-#' Seats is an Arima Model Based decomposition algorithm working in conjunction with Tramo.
 #' Function allowing to customize parameters in the Seats (decomposition) part of a Tramo-Seats.
-#'
+#' Seats is an Arima Model Based decomposition algorithm working in conjunction with Tramo.
 #'
 #' @param x the specification to be modified, object of class `"JD3_TRAMOSEATS_SPEC"`, has to be generated with `spec_tramoseats()` function
 #' @param approximation character: the approximation mode. When the ARIMA model estimated by TRAMO does not accept an admissible decomposition, SEATS: `"None"` - performs an approximation; `"Legacy"` - replaces the model with a decomposable one; `"Noisy"` - estimates a new model by adding a white noise to the non-admissible model estimated by TRAMO. Default="Legacy".
@@ -28,22 +27,17 @@
 #' - `"McElroyMatrix"`: it has the same stability issues as the Burman's algorithm.
 #' @param bcasts,fcasts numeric: the number of backasts (`bcasts`) or forecasts (`fcasts`) used in the decomposition in periods (positive values) or years (negative values).Default `bcasts`=0. Default `fcasts`=0.
 #' @param bias TODO.
-# @examples
-# ISSUE : not working following example
-# x<-spec_tramoseats("rsa4")
-# s <- set_seats(x,
-#                approximation = "Legacy",
-#                trend.boundary = 0.95,
-#                seas.boundary = 0.5,
-#                seas.boundary.unique = NA,
-#                seas.tolerance = NA,
-#                ma.boundary = NA,
-#                fcasts = -1,
-#                bcasts = 18,
-#                algorithm = "KalmanSmoother",
-#                bias = NA)
-#y=rjd3toolkit::ABS$X0.2.09.10.M
-#rjd3tramoseats::tramoseats(y,spec=s)
+#' @examples
+#'  init_spec<-spec_tramoseats("rsa4")
+#'  new_spec<- set_seats(init_spec,
+#'  approximation = "Legacy",
+#'  trend.boundary = 0.95,
+#'  seas.boundary = 0.5,
+#'  fcasts = -2,
+#'  bcasts = 18,
+#'  algorithm = "KalmanSmoother")
+#'  y <- rjd3toolkit::ABS$X0.2.09.10.M
+#'  sa<- rjd3tramoseats::tramoseats(y,spec=new_spec)
 #' @return an object of class  `"JD3_TRAMOSEATS_SPEC"`
 #' @references
 #' More information and examples related to 'JDemetra+' features in the online documentation:
