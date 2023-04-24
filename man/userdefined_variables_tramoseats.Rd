@@ -2,15 +2,18 @@
 % Please edit documentation in R/ud_var.R
 \name{userdefined_variables_tramoseats}
 \alias{userdefined_variables_tramoseats}
-\title{List of all available output objects (series, parameters, diagnostics)}
+\title{Display list of all available output objects (series, parameters, diagnostics)}
 \usage{
 userdefined_variables_tramoseats(x = c("TRAMO-SEATS", "TRAMO"))
 }
 \arguments{
 \item{x}{a character to indicate the estimation function for which the output items list will be displayed.}
 }
+\value{
+a vector containing the names of all the available output objects (series, diagnostics, parameters)
+}
 \description{
-Function generating a comprehensive list of available output variables generated in the estimation process
+Function generating a comprehensive list of available output variables from the estimation process
 by the  \code{tramo()} and \code{tramoseats()} functions.
 Some items are available in the default estimation output but the remainder can be added
 using the \code{userdefined} parameter.
@@ -23,4 +26,9 @@ y = rjd3toolkit::ABS$X0.2.09.10.M
 m <- tramoseats(y,"rsafull", userdefined=c("ycal","variancedecomposition.seasonality"))
 m$user_defined$ycal
 m$user_defined$variancedecomposition.seasonality
+
+}
+\references{
+More information and examples related to 'JDemetra+' features in the online documentation:
+\url{https://jdemetra-new-documentation.netlify.app/}
 }

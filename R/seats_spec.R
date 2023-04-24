@@ -27,17 +27,6 @@
 #' - `"McElroyMatrix"`: it has the same stability issues as the Burman's algorithm.
 #' @param bcasts,fcasts numeric: the number of backasts (`bcasts`) or forecasts (`fcasts`) used in the decomposition in periods (positive values) or years (negative values).Default `bcasts`=0. Default `fcasts`=0.
 #' @param bias TODO.
-#' @examples
-#'  init_spec<-spec_tramoseats("rsa4")
-#'  new_spec<- set_seats(init_spec,
-#'  approximation = "Legacy",
-#'  trend.boundary = 0.95,
-#'  seas.boundary = 0.5,
-#'  fcasts = -2,
-#'  bcasts = 18,
-#'  algorithm = "KalmanSmoother")
-#'  y <- rjd3toolkit::ABS$X0.2.09.10.M
-#'  sa<- rjd3tramoseats::tramoseats(y,spec=new_spec)
 #' @return an object of class  `"JD3_TRAMOSEATS_SPEC"`
 #' @references
 #' More information and examples related to 'JDemetra+' features in the online documentation:
