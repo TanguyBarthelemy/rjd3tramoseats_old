@@ -37,15 +37,15 @@ tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), 
     spec = match.arg(spec[1],
                      choices = c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5")
     )
-    jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ljdplus/tramo/TramoOutput;", "fullProcess", jts, spec)
+    jrslt<-.jcall("jdplus/tramoseats/base/r/Tramo", "Ljdplus/tramoseats/base/core/tramo/TramoOutput;", "fullProcess", jts, spec)
   }else{
     jspec<-.r2jd_spec_tramo(spec)
     if (is.null(context)){
-      jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
+      jcontext <- .jnull("jdplus/toolkit/base/api/timeseries/regression/ModellingContext")
     } else {
       jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
-    jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ljdplus/tramo/TramoOutput;", "fullProcess", jts, jspec, jcontext)
+    jrslt<-.jcall("jdplus/tramoseats/base/r/Tramo", "Ljdplus/tramoseats/base/core/tramo/TramoOutput;", "fullProcess", jts, jspec, jcontext)
   }
   if (is.jnull(jrslt)){
     return (NULL)
@@ -65,15 +65,15 @@ fast_tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr
     spec = match.arg(spec[1],
                      choices = c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5")
     )
-    jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ljdplus/regsarima/regular/RegSarimaModel;", "process", jts, spec)
+    jrslt<-.jcall("jdplus/tramoseats/base/r/Tramo", "Ljdplus/toolkit/base/core/regsarima/regular/RegSarimaModel;", "process", jts, spec)
   }else{
     jspec<-.r2jd_spec_tramo(spec)
     if (is.null(context)){
-      jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
+      jcontext <- .jnull("jdplus/toolkit/base/api/timeseries/regression/ModellingContext")
     } else {
       jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
-    jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ljdplus/regsarima/regular/RegSarimaModel;", "process", jts, jspec, jcontext)
+    jrslt<-.jcall("jdplus/tramoseats/base/r/Tramo", "Ljdplus/toolkit/base/core/regsarima/regular/RegSarimaModel;", "process", jts, jspec, jcontext)
   }
   if (is.jnull(jrslt)){
     return (NULL)
@@ -87,7 +87,7 @@ fast_tramo<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr
 .tramo_output<-function(jq){
   if (is.jnull(jq))
     return (NULL)
-  q<-.jcall("demetra/tramoseats/r/Tramo", "[B", "toBuffer", jq)
+  q<-.jcall("jdplus/tramoseats/base/r/Tramo", "[B", "toBuffer", jq)
   p<-RProtoBuf::read(tramoseats.TramoOutput, q)
   return (structure(list(
     result=rjd3toolkit::.p2r_regarima_rslts(p$result),
@@ -130,15 +130,15 @@ tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4
     spec = match.arg(spec[1],
                      choices = c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5")
     )
-    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsOutput;", "fullProcess", jts, spec)
+    jrslt<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "Ljdplus/tramoseats/base/core/tramoseats/TramoSeatsOutput;", "fullProcess", jts, spec)
   }else{
     jspec<-.r2jd_spec_tramoseats(spec)
     if (is.null(context)){
-      jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
+      jcontext <- .jnull("jdplus/toolkit/base/api/timeseries/regression/ModellingContext")
     } else {
       jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
-    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsOutput;", "fullProcess", jts, jspec, jcontext )
+    jrslt<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "Ljdplus/tramoseats/base/core/tramoseats/TramoSeatsOutput;", "fullProcess", jts, jspec, jcontext )
   }
   if (is.jnull(jrslt)){
     return (NULL)
@@ -157,15 +157,15 @@ fast_tramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", 
     spec = match.arg(spec[1],
                      choices = c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5")
     )
-    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsResults;", "process", jts, spec)
+    jrslt<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "Ljdplus/tramoseats/base/core/tramoseats/TramoSeatsResults;", "process", jts, spec)
   }else{
     jspec<-.r2jd_spec_tramoseats(spec)
     if (is.null(context)){
-      jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
+      jcontext <- .jnull("jdplus/toolkit/base/api/timeseries/regression/ModellingContext")
     } else {
       jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
-    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsResults;", "process", jts, jspec, jcontext)
+    jrslt<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "Ljdplus/tramoseats/base/core/tramoseats/TramoSeatsResults;", "process", jts, jspec, jcontext)
   }
   if (is.jnull(jrslt)){
     return (NULL)
@@ -184,15 +184,15 @@ jtramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
     spec = match.arg(spec[1],
                      choices = c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa4", "rsa5")
     )
-    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsResults;", "process", jts, spec)
+    jrslt<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "Ljdplus/tramoseats/base/core/tramoseats/TramoSeatsResults;", "process", jts, spec)
   }else{
     jspec<-.r2jd_spec_tramoseats(spec)
     if (is.null(context)){
-      jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
+      jcontext <- .jnull("jdplus/toolkit/base/api/timeseries/regression/ModellingContext")
     } else {
       jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
-    jrslt<-.jcall("demetra/tramoseats/r/TramoSeats", "Ljdplus/tramoseats/TramoSeatsResults;", "process", jts, jspec, jcontext)
+    jrslt<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "Ljdplus/tramoseats/base/core/tramoseats/TramoSeatsResults;", "process", jts, jspec, jcontext)
   }
   if (is.jnull(jrslt)){
     return (NULL)
@@ -205,7 +205,7 @@ jtramoseats<-function(ts, spec=c("rsafull", "rsa0", "rsa1", "rsa2", "rsa3", "rsa
 .tramoseats_output<-function(jq){
   if (is.jnull(jq))
     return (NULL)
-  q<-.jcall("demetra/tramoseats/r/TramoSeats", "[B", "toBuffer", jq)
+  q<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "[B", "toBuffer", jq)
   p<-RProtoBuf::read(tramoseats.TramoSeatsOutput, q)
   return (structure(list(
     result=.p2r_tramoseats_rslts(p$result),
@@ -250,7 +250,7 @@ tramo_refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Complete
     stop("Invalid specification type")
   jspec<-.r2jd_spec_tramo(spec)
   if (is.null(refspec)){
-    jrefspec<-.jcall("demetra/tramo/TramoSpec", "Ldemetra/tramo/TramoSpec;", "fromString", "trfull")
+    jrefspec<-.jcall("jdplus/tramoseats/base/api/tramo/TramoSpec", "Ljdplus/tramoseats/base/api/tramo/TramoSpec;", "fromString", "trfull")
 
   }else{
     if (!inherits(refspec, "JD3_TRAMO_SPEC"))
@@ -258,7 +258,7 @@ tramo_refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Complete
     jrefspec<-.r2jd_spec_tramo(refspec)
   }
   jdom<-rjd3toolkit::.jdomain(period, start, end)
-  jnspec<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/tramo/TramoSpec;", "refreshSpec", jspec, jrefspec, jdom, policy)
+  jnspec<-.jcall("jdplus/tramoseats/base/r/Tramo", "Ljdplus/tramoseats/base/api/tramo/TramoSpec;", "refreshSpec", jspec, jrefspec, jdom, policy)
   return (.jd2r_spec_tramo(jnspec))
 }
 
@@ -270,7 +270,7 @@ tramoseats_refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Com
     stop("Invalid specification type")
   jspec<-.r2jd_spec_tramoseats(spec)
   if (is.null(refspec)){
-    jrefspec<-.jcall("demetra/tramoseats/TramoSeatsSpec", "Ldemetra/tramoseats/TramoSeatsSpec;", "fromString", "rsafull")
+    jrefspec<-.jcall("jdplus/tramoseats/base/api/tramoseats/TramoSeatsSpec", "Ljdplus/tramoseats/base/api/tramoseats/TramoSeatsSpec;", "fromString", "rsafull")
 
   }else{
     if (!inherits(refspec, "JD3_TRAMOSEATS_SPEC"))
@@ -278,7 +278,7 @@ tramoseats_refresh<-function(spec, refspec=NULL, policy=c("FreeParameters", "Com
     jrefspec<-.r2jd_spec_tramoseats(refspec)
   }
   jdom<-rjd3toolkit::.jdomain(period, start, end)
-  jnspec<-.jcall("demetra/tramoseats/r/TramoSeats", "Ldemetra/tramoseats/TramoSeatsSpec;", "refreshSpec", jspec, jrefspec, jdom, policy)
+  jnspec<-.jcall("jdplus/tramoseats/base/r/TramoSeats", "Ljdplus/tramoseats/base/api/tramoseats/TramoSeatsSpec;", "refreshSpec", jspec, jrefspec, jdom, policy)
   return (.jd2r_spec_tramoseats(jnspec))
 
 }
@@ -322,15 +322,15 @@ terror<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"),
     spec = match.arg(spec[1],
                      choices = c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5")
     )
-    jrslt<-.jcall("demetra/tramoseats/r/Terror", "Ldemetra/math/matrices/Matrix;", "process", jts, spec, as.integer(nback))
+    jrslt<-.jcall("jdplus/tramoseats/base/r/Terror", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "process", jts, spec, as.integer(nback))
   }else{
     jspec<-.r2jd_spec_tramo(spec)
     if (is.null(context)){
-      jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
+      jcontext <- .jnull("jdplus/toolkit/base/api/timeseries/regression/ModellingContext")
     } else {
       jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
-    jrslt<-.jcall("demetra/tramoseats/r/Terror", "Ldemetra/math/matrices/Matrix;", "process", jts, jspec, jcontext, as.integer(nback))
+    jrslt<-.jcall("jdplus/tramoseats/base/r/Terror", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "process", jts, jspec, jcontext, as.integer(nback))
   }
   if (is.jnull(jrslt)){
     return (NULL)
@@ -355,9 +355,9 @@ terror<-function(ts, spec=c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"),
 #' - `fraw` the forecast of the transformed series.
 #' - `efraw` the standard deviation of the forecast of the transformed series.
 #' @examples
-#' tramo.forecast(rjd3toolkit::ABS$X0.2.09.10.M)
+#' tramo_forecast(rjd3toolkit::ABS$X0.2.09.10.M)
 #' @export
-tramo.forecast<-function(ts, spec= c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), nf=-1, context=NULL){
+tramo_forecast<-function(ts, spec= c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5"), nf=-1, context=NULL){
   # TODO : check parameters
   jts<-rjd3toolkit::.r2jd_ts(ts)
   if (nf<0) nf<-frequency(ts)*(-nf)
@@ -367,15 +367,15 @@ tramo.forecast<-function(ts, spec= c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4"
     spec = match.arg(spec[1],
                      choices = c("trfull", "tr0", "tr1", "tr2", "tr3", "tr4", "tr5")
     )
-    jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/math/matrices/Matrix;", "forecast", jts, spec, as.integer(nf))
+    jrslt<-.jcall("jdplus/tramoseats/base/r/Tramo", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "forecast", jts, spec, as.integer(nf))
   }else{
     jspec<-.r2jd_spec_tramo(spec)
     if (is.null(context)){
-      jcontext <- .jnull("demetra/timeseries/regression/ModellingContext")
+      jcontext <- .jnull("jdplus/toolkit/base/api/timeseries/regression/ModellingContext")
     } else {
       jcontext <- rjd3toolkit::.r2jd_modellingcontext(context)
     }
-    jrslt<-.jcall("demetra/tramoseats/r/Tramo", "Ldemetra/math/matrices/Matrix;", "forecast", jts, jspec, jcontext, as.integer(nf))
+    jrslt<-.jcall("jdplus/tramoseats/base/r/Tramo", "Ljdplus/toolkit/base/api/math/matrices/Matrix;", "forecast", jts, jspec, jcontext, as.integer(nf))
   }
   if (is.jnull(jrslt)){
     return (NULL)

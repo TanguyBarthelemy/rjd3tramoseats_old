@@ -33,7 +33,7 @@ tramo_outliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=F,
   }
 
 
-  jtramo<-.jcall("demetra/tramoseats/r/TramoOutliersDetection", "Ldemetra/tramoseats/r/TramoOutliersDetection$Results;", "process", rjd3toolkit::.r2jd_ts(y),
+  jtramo<-.jcall("jdplus/tramoseats/base/r/TramoOutliersDetection", "Ljdplus/tramoseats/base/r/TramoOutliersDetection$Results;", "process", rjd3toolkit::.r2jd_ts(y),
                as.integer(order), as.integer(seasonal), mean, rjd3toolkit::.r2jd_matrix(X),
                ao, ls, tc, so, cv, ml)
   model<-list(

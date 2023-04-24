@@ -11,6 +11,6 @@ NULL
   RProtoBuf::readProtoFiles2(protoPath = proto.dir)
 
   # reload extractors
-  .jcall("demetra/information/InformationExtractors", "V", "reloadExtractors")
+  .jcall("jdplus/toolkit/base/api/information/InformationExtractors", "V", "reloadExtractors")
 }
 

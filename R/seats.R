@@ -17,7 +17,7 @@ seats_decompose<-function(sarima, seas.tolerance=2, trend.boundary=.5, seas.boun
     stop("Invalid model")
   approximation<-match.arg(approximation)
   jsarima<-rjd3toolkit::.r2jd_sarima(sarima)
-  jucm<-.jcall("demetra/tramoseats/r/Seats", "Ljdplus/ucarima/UcarimaModel;", "decompose",
+  jucm<-.jcall("jdplus/tramoseats/base/r/Seats", "Ljdplus/toolkit/base/core/ucarima/UcarimaModel;", "decompose",
          jsarima, seas.tolerance, trend.boundary, seas.boundary, seas.boundary.unique, approximation)
   if (is.jnull(jucm)){
     return (NULL)
