@@ -20,9 +20,14 @@ an object of class \code{"JD3_TRAMOSEATS_SPEC"} (\code{spec_tramoseats()}) or
 \code{"JD3_TRAMO_SPEC"} (\code{spec_tramo()}).
 }
 \description{
-Set of functions to create default specification associated to the TRAMO-SEATS seasonal adjustment method.
+Set of functions(\code{spec_tramoseats()},\code{spec_tramo()}) to create default specifications associated with the TRAMO-SEATS seasonal adjustment method.
+Specification creation can be restricted to the tramo part with the \code{spec_tramo()} function.
 }
 \details{
+Without argument \code{spec_tramo()} yields a TR5 specification
+
+without argument \code{spec_tramoseats()}  yields a RSA5 specification
+
 The available predefined 'JDemetra+' model specifications are described in the table below:
 
 \tabular{rrrrrrrr}{
@@ -35,4 +40,11 @@ RSA4/TR3 |\tab automatic |\tab AO/LS/TC |\tab 2 td vars + Easter |\tab automatic
 RSA5/TR5 |\tab automatic |\tab AO/LS/TC |\tab 7 td vars + Easter |\tab automatic\cr
 RSAfull/TRfull |\tab automatic |\tab AO/LS/TC |\tab automatic |\tab automatic
 }
+}
+\examples{
+init_spec <- spec_tramoseats()
+init_spec <- spec_tramo()
+init_spec <- spec_tramoseats("rsa3")
+init_spec <- spec_tramo("tr3")
+
 }

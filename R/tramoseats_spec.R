@@ -1,14 +1,22 @@
 #' @include utils.R
 NULL
 
-
-
-
 #' TRAMO/TRAMO-SEATS Default Specification
 #'
-#' Set of functions to create default specification associated to the TRAMO-SEATS seasonal adjustment method.
+#' Set of functions(`spec_tramoseats()`,`spec_tramo()`) to create default specifications associated with the TRAMO-SEATS seasonal adjustment method.
+#' Specification creation can be restricted to the tramo part with the `spec_tramo()` function.
+#'
+#' Without argument `spec_tramo()` yields a TR5 specification
+#'
+#' without argument `spec_tramoseats()`  yields a RSA5 specification
 #'
 #' @param name the name of a predefined specification.
+#'
+#' @examples
+#' init_spec <- spec_tramoseats()
+#' init_spec <- spec_tramo()
+#' init_spec <- spec_tramoseats("rsa3")
+#' init_spec <- spec_tramo("tr3")
 #'
 #' @return an object of class `"JD3_TRAMOSEATS_SPEC"` (`spec_tramoseats()`) or
 #' `"JD3_TRAMO_SPEC"` (`spec_tramo()`).

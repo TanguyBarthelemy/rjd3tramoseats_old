@@ -2,14 +2,16 @@
 #' @importFrom stats is.ts frequency
 NULL
 
-#' Detect Outliers in TRAMO Model
+#' Outlier Detection with a Tramo Model
 #'
-#' @param y the dependent variable (`ts` object).
+#' Tramo is a particular regarima model estimation algorithm, mainly used to linearized the series before performing a decomposition with Seats
+#'
+#' @param y the dependent variable (a `ts` object).
 #' @param order,seasonal the orders of the ARIMA model.
-#' @param mean boolean to include or not the mean.
-#' @param X explanatory varibales.
-#' @param X.td trading days regressors.
-#' @param ao,ls,so,tc boolean to indicate which outliers are detected
+#' @param mean Boolean to include or not the mean.
+#' @param X user defined regressors (other than calendar).
+#' @param X.td calendar regressors.
+#' @param ao,ls,so,tc Boolean to indicate which type of outliers should be detected.
 #' @param cv  `numeric`. The entered critical value for the outliers' detection procedure.
 #' If equal to 0 the critical value for the outliers' detection procedure is automatically determined
 #' by the number of observations.

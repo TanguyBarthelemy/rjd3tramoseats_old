@@ -2,7 +2,7 @@
 % Please edit documentation in R/tramo_outliers.R
 \name{tramo_outliers}
 \alias{tramo_outliers}
-\title{Detect Outliers in TRAMO Model}
+\title{Outlier Detection with a Tramo Model}
 \usage{
 tramo_outliers(
   y,
@@ -20,17 +20,17 @@ tramo_outliers(
 )
 }
 \arguments{
-\item{y}{the dependent variable (\code{ts} object).}
+\item{y}{the dependent variable (a \code{ts} object).}
 
 \item{order, seasonal}{the orders of the ARIMA model.}
 
-\item{mean}{boolean to include or not the mean.}
+\item{mean}{Boolean to include or not the mean.}
 
-\item{X}{explanatory varibales.}
+\item{X}{user defined regressors (other than calendar).}
 
-\item{X.td}{trading days regressors.}
+\item{X.td}{calendar regressors.}
 
-\item{ao, ls, so, tc}{boolean to indicate which outliers are detected}
+\item{ao, ls, so, tc}{Boolean to indicate which type of outliers should be detected.}
 
 \item{cv}{\code{numeric}. The entered critical value for the outliers' detection procedure.
 If equal to 0 the critical value for the outliers' detection procedure is automatically determined
@@ -42,7 +42,7 @@ by the number of observations.}
 a \code{"JDSTS"} object.
 }
 \description{
-Detect Outliers in TRAMO Model
+Tramo is a particular regarima model estimation algorithm, mainly used to linearized the series before performing a decomposition with Seats
 }
 \examples{
 tramo_outliers(rjd3toolkit::ABS$X0.2.09.10.M)
