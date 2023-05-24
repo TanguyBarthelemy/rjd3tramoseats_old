@@ -16,7 +16,8 @@ tramo_outliers(
   tc = F,
   so = F,
   cv = 0,
-  ml = F
+  ml = F,
+  clean = F
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ If equal to 0 the critical value for the outliers' detection procedure is automa
 by the number of observations.}
 
 \item{ml}{Use of maximum likelihood (otherwise approximation by means of Hannan-Rissanen).}
+
+\item{clean}{Clean missing values at the beginning/end of the series. Regression variables are automatically resized, if need be.}
 }
 \value{
 a \code{"JDSTS"} object.

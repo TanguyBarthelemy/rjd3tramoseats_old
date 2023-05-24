@@ -16,6 +16,7 @@ NULL
 #' If equal to 0 the critical value for the outliers' detection procedure is automatically determined
 #' by the number of observations.
 #' @param ml Use of maximum likelihood (otherwise approximation by means of Hannan-Rissanen).
+#' @param clean Clean missing values at the beginning/end of the series. Regression variables are automatically resized, if need be.
 #'
 #' @return a `"JDSTS"` object.
 #'
@@ -23,7 +24,7 @@ NULL
 #' tramo_outliers(rjd3toolkit::ABS$X0.2.09.10.M)
 #' @export
 tramo_outliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=F,
-                      X=NULL, X.td=NULL, ao=T, ls=T, tc=F, so=F, cv=0, ml=F){
+                      X=NULL, X.td=NULL, ao=T, ls=T, tc=F, so=F, cv=0, ml=F, clean=F){
   if (!is.ts(y)){
     stop("y must be a time series")
   }
@@ -35,9 +36,9 @@ tramo_outliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=F,
 
   jtramo<-.jcall("jdplus/tramoseats/base/r/TramoOutliersDetection", "Ljdplus/tramoseats/base/r/TramoOutliersDetection$Results;", "process", rjd3toolkit::.r2jd_ts(y),
                as.integer(order), as.integer(seasonal), mean, rjd3toolkit::.r2jd_matrix(X),
-               ao, ls, tc, so, cv, ml)
+               ao, ls, tc, so, cv, ml, clean)
   model<-list(
-    y=as.numeric(y),
+    y=rjd3toolkit::.proc_ts(jtramo, "y"),
     variables=rjd3toolkit::.proc_vector(jtramo, "variables"),
     X=rjd3toolkit::.proc_matrix(jtramo, "regressors"),
     b=rjd3toolkit::.proc_vector(jtramo, "b"),
@@ -51,5 +52,5 @@ tramo_outliers<-function(y, order=c(0L,1L,1L), seasonal=c(0L,1L,1L), mean=F,
   return(structure(list(
     model=model,
     likelihood=list(initial=ll0, final=ll1)),
-    class="JDSTS"))
+    class="JD3_REGARIMA_OUTLIERS"))
 }
